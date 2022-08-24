@@ -15,13 +15,10 @@ specifiers:
   typescript: ^4.7.4
   vite: ^3.0.9
   vue: ^3.2.37
-  vue-class-component: ^7.2.6
-  vue-property-decorator: ^9.1.2
   vue-tsc: ^0.39.5
 
 dependencies:
   vue: 3.2.37
-  vue-property-decorator: 9.1.2_w4kududuhktvlhprk56fh76td4
 
 devDependencies:
   '@types/jest': 28.1.8
@@ -37,7 +34,6 @@ devDependencies:
   ts-node: 10.9.1_57uwcby55h6tzvkj3v5sfcgxoe
   typescript: 4.7.4
   vite: 3.0.9_sass@1.54.5
-  vue-class-component: 7.2.6_vue@3.2.37
   vue-tsc: 0.39.5_typescript@4.7.4
 
 packages:
@@ -3434,13 +3430,6 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vue-class-component/7.2.6_vue@3.2.37:
-    resolution: {integrity: sha512-+eaQXVrAm/LldalI272PpDe3+i4mPis0ORiMYxF6Ae4hyuCh15W8Idet7wPUEs4N4YptgFHGys4UrgNQOMyO6w==}
-    peerDependencies:
-      vue: ^2.0.0
-    dependencies:
-      vue: 3.2.37
-
   /vue-eslint-parser/9.0.3_eslint@8.22.0:
     resolution: {integrity: sha512-yL+ZDb+9T0ELG4VIFo/2anAOz8SvBdlqEnQnvJ3M7Scq56DvtjY0VY88bByRZB0D4J0u8olBcfrXTVONXsh4og==}
     engines: {node: ^14.17.0 || >=16.0.0}
@@ -3458,16 +3447,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /vue-property-decorator/9.1.2_w4kududuhktvlhprk56fh76td4:
-    resolution: {integrity: sha512-xYA8MkZynPBGd/w5QFJ2d/NM0z/YeegMqYTphy7NJQXbZcuU6FC6AOdUAcy4SXP+YnkerC6AfH+ldg7PDk9ESQ==}
-    peerDependencies:
-      vue: '*'
-      vue-class-component: '*'
-    dependencies:
-      vue: 3.2.37
-      vue-class-component: 7.2.6_vue@3.2.37
-    dev: false
 
   /vue-tsc/0.39.5_typescript@4.7.4:
     resolution: {integrity: sha512-jhTsrKhZkafpIeN4Cbhr1K53hNfa/oesSrlh7hUaeHyCk55VhZT6oJkwJbtqN4MYkWZIwPrm3/xTwsELuf2ocg==}
