@@ -1,7 +1,7 @@
 <template>
   <div class="game__container">
     <div class="game" :style="getCssVariables">
-      <div v-for="(nbInputs, lineType) in inputsData" :key="lineType.id" :class="`inputs__${lineType}s`">
+      <div v-for="(nbInputs, lineType) in inputsData" :key="lineType" :class="`inputs__${lineType}s`">
         <div v-for="(line, i) in inputs[`${lineType}s`]" :key="line.id" :class="lineType">
           <div v-for="(cell, j) in line" :key="cell.id" class="input__case">
             <input type="number" v-model="inputs[`${lineType}s`][i][j]" min="0"

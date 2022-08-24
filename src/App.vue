@@ -10,6 +10,8 @@
 </template>
 
 <script lang="ts">
+import {Component, Vue} from "vue-property-decorator";
+
 import Options from "./components/Options.vue";
 import Game from "./components/Game.vue";
 
@@ -21,6 +23,7 @@ import {MapCupcake} from "../nono_tests/test_cupcake_5_5";
 import {MapKey} from "../nono_tests/test_key_5_5";
 import {MapHat} from "../nono_tests/test_hat_5_5";
 import {MapPhare} from "../nono_tests/test_phare_10_10";
+import component from "*.vue";
 
 const Maps = {
   "w5": [
@@ -38,29 +41,30 @@ function getRandomMap(maps: InputsMap[]): InputsMap {
 }
 
 export default {
+  name: "app",
   components: {
     Options,
     Game
   },
-  data: () => {
+  data() {
     return {
       Nonogram: new Nonogram() as Nonogram | null
     };
   },
   methods: {
-    eventSizeChange(newSize: Size) {
+    eventSizeChange: (newSize: Size) => {
       this.updateNonogram();
       this.Nonogram.size = newSize;
       this.Nonogram.updateMap();
     },
-    updateNonogram() {
+    updateNonogram: () => {
       this.Nonogram = new Nonogram();
     },
 
-    eventClaimResolve() {
+    eventClaimResolve: () => {
       this.Nonogram.resolve();
     },
-    eventInputsChanged(newInputs) {
+    eventInputsChanged: (newInputs) => {
       this.updateNonogram();
       this.Nonogram.loadMap(newInputs);
     }

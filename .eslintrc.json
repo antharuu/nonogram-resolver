@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2022": true
+    "es2022": true,
+    "jest/globals": true
   },
   "extends": [
     "eslint:recommended",
@@ -15,7 +16,8 @@
   },
   "plugins": [
     "vue",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "jest"
   ],
   "rules": {
     "indent": [
@@ -33,6 +35,26 @@
     "semi": [
       "error",
       "always"
-    ]
+    ],
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error"
+  },
+  "settings": {
+    "jest": {
+      "globalAliases": {
+        "describe": [
+          "context"
+        ],
+        "fdescribe": [
+          "fcontext"
+        ],
+        "xdescribe": [
+          "xcontext"
+        ]
+      }
+    }
   }
 }
