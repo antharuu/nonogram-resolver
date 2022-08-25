@@ -1,15 +1,14 @@
 import {InputsLine, InputsMap} from "./Types/InputsTypes";
-import {LineType, LineTypeSizeName} from "./Enums/Lines";
+import {LineType, LineTypeSizeName} from "./Enums/Lines.js";
 import {SizeName} from "./Types/Globals";
 
 export class MapChecker {
 
 	public static checkLine(line: InputsLine, max: number): boolean {
-
 		return this.getLineCount(line) <= max;
 	}
 
-	private static getLineCount(line: InputsLine): number {
+	static getLineCount(line: InputsLine): number {
 		let totalUsed = 0;
 		line.forEach(c => totalUsed += c);
 		return Math.max(totalUsed + line.length - 1, 0);
