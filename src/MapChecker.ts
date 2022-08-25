@@ -9,13 +9,13 @@ export class MapChecker {
 		return this.getLineCount(line) <= max;
 	}
 
-	private static getLineCount(line: InputsLine) {
+	private static getLineCount(line: InputsLine): number {
 		let totalUsed = 0;
 		line.forEach(c => totalUsed += c);
 		return Math.max(totalUsed + line.length - 1, 0);
 	}
 
-	static check(map: InputsMap) {
+	static check(map: InputsMap): boolean {
 		let possible = true;
 
 		this.forEachLines(map, (line, _index, _lineType, lineSize) => {
@@ -27,7 +27,10 @@ export class MapChecker {
 		return possible;
 	}
 
-	static forEachLines(map: InputsMap, callback: (line: InputsLine, index: number, lineType: LineType, lineSize: number) => void) {
+	static forEachLines(
+		map: InputsMap,
+		callback: (line: InputsLine, index: number, lineType: LineType, lineSize: number) => void
+	): void {
 		[LineType.Col, LineType.Row].forEach(lineType => {
 			map[`${lineType}s`].forEach((line, index) => {
 				callback(line, index, lineType, this.getSize(map, lineType, 1));
