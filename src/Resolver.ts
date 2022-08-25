@@ -56,6 +56,7 @@ export default class Resolver {
 
 		for (let tr = 0; tr < possiblesPositions; tr++) {
 			const possibilityLine = [...line];
+			console.log();
 			const val = possibilityLine.shift();
 			const possibleLine: CellState[] = [];
 			if (val) {
