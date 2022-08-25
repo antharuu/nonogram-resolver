@@ -1,0 +1,22 @@
+\:root
+  font-size: 16px
+
+*
+  box-sizing: border-box
+
+html, body
+  padding: 0
+  margin: 0
+  display: grid
+  height: 100vh
+  background-color: #000
+
+#app
+  --size: clamp(4rem, calc(100vw - 2rem), calc(100vh - 2rem))
+  margin: auto
+  outline: 1px solid red
+  width: var(--size)
+  height: var(--size)
+  position: relative
+  z-index: 1
+  overflow: hidden
