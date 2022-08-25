@@ -1,6 +1,6 @@
 {
   "name": "nonogram-resolver",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A nonogram resolver algorithm",
   "main": "index.js",
   "type": "module",
