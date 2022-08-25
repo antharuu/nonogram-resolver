@@ -16,6 +16,7 @@ export default class Resolver {
 	getLinePossibilities(line: InputsLine, lineType: LineType = LineType.Col): CellState[][] {
 		const lineCount = MapChecker.getLineCount(line),
 			maxSize = MapChecker.getSize(this.map, lineType, 1);
+
 		let possibilities: CellState[][] = [];
 
 		if (lineCount <= 0) {
@@ -23,7 +24,7 @@ export default class Resolver {
 		} else if (lineCount === maxSize) {
 			possibilities.push(this.getLineFullPossibilities(line, maxSize));
 		} else {
-			possibilities = Resolver.getLinePartialPossibilities(line, lineCount, maxSize);
+			possibilities = Resolver.getLinePartialPossibilities(line, maxSize);
 		}
 
 		return possibilities;
@@ -48,34 +49,20 @@ export default class Resolver {
 		return fullPossible;
 	}
 
-	private static getLinePartialPossibilities(line: InputsLine, lineCount: number, maxSize: number): CellState[][] {
+	private static getLinePartialPossibilities(line: InputsLine, maxSize: number): CellState[][] {
 		const possibilities: CellState[][] = [];
 		const emptyValues = maxSize - MapChecker.getLineTotal(line);
-		// const possiblesPositions = Math.ceil(maxSize / lineCount);
 		const possiblesPositions = emptyValues + 1;
 
-		for (let tr = 0; tr < possiblesPositions; tr++) {
-			const possibilityLine = [...line];
-			console.log();
-			const val = possibilityLine.shift();
-			const possibleLine: CellState[] = [];
-			if (val) {
-				const seq = Resolver.getSequence(val, Filled);
-				if (this.isFinishedLine([...possibleLine, ...seq], lineCount)) {
-					const currentLine = this.finishLine([...possibleLine, ...seq], lineCount, maxSize);
-					if (!this.hasPossibility(possibilities, currentLine)) {
-						possibilities.push(currentLine);
-					}
-				} else {
-					console.log("C'est pas fini");
-				}
+		const els = this.getLineElements(line);
+		for (let pos = 0; pos < possiblesPositions; pos++) {
+			for (let nbEmpty = 0; nbEmpty < emptyValues; nbEmpty++) {
+				const filledEls = this.fillElements(els, pos, this.getSequence(nbEmpty + 1, 0));
+				let ln = this.elementsToLine(filledEls);
+				ln = this.fillLineEnd(ln, maxSize);
+				if (!this.hasPossibility(possibilities, ln) && ln.length === maxSize) possibilities.push(ln);
 			}
 		}
-
-		console.log("Base line:", line);
-		if (possibilities.length <= 0) console.log([]);
-		else console.log(...possibilities);
-
 
 		return possibilities;
 	}
@@ -86,16 +73,48 @@ export default class Resolver {
 		return arr;
 	}
 
-	private static finishLine(line: CellState[], lineCount: number, maxSize: number): CellState[] {
-		if (this.isFinishedLine(line, lineCount)) {
-			if (line.length < maxSize) {
-				line = [...line, ...Resolver.getSequence(maxSize - line.length, Empty)];
+	static isFinishedLine = (line: CellState[], lineCount: number): boolean => lineCount <= MapChecker.getLineCount(line);
+
+	static getLineElements(line: InputsLine): InputsLine[] {
+		const inputsElements: InputsLine[] = [];
+		line.forEach(el => {
+			const element = [el];
+			if (inputsElements.length < line.length - 1) {
+				element.push(0);
 			}
-		}
-		return line;
+			inputsElements.push(element);
+		});
+
+		return inputsElements;
 	}
 
-	static isFinishedLine = (line: CellState[], lineCount: number): boolean => lineCount <= MapChecker.getLineCount(line);
+	static fillElements(elements: number[][], indexPosition = -1, value: number[] = [0]): number[][] {
+		const returnedElements: number[][] = [];
+		let inserted = false;
+		elements.forEach((el, i) => {
+			if (i === indexPosition) {
+				returnedElements.push(value);
+				inserted = true;
+			}
+			returnedElements.push(el);
+		});
+		if (!inserted) returnedElements.push(value);
+		return returnedElements;
+	}
+
+	static elementsToLine(elements: number[][]): InputsLine {
+		const line: InputsLine = [];
+		elements.forEach(lineParts => lineParts.forEach(linePart => {
+			if (linePart === 0) {
+				line.push(Empty);
+			} else {
+				for (let i = 0; i < linePart; i++) {
+					line.push(Filled);
+				}
+			}
+		}));
+		return line;
+	}
 
 	private static hasPossibility(possibilities: CellState[][], currentLine: CellState[]): boolean {
 		let has = false;
@@ -111,44 +130,10 @@ export default class Resolver {
 		return has;
 	}
 
-	getLineElements(line: InputsLine): InputsLine[] {
-		const inputsElements: InputsLine[] = [];
-		line.forEach(el => {
-			const element = [el];
-			if (inputsElements.length < line.length - 1) {
-				element.push(0);
-			}
-			inputsElements.push(element);
-		});
-
-		return inputsElements;
-	}
-
-	fillElements(elements: number[][], indexPosition = -1, value: number[] = [0]): number[][] {
-		const returnedElements: number[][] = [];
-		let inserted = false;
-		elements.forEach((el, i) => {
-			if (i === indexPosition) {
-				returnedElements.push(value);
-				inserted = true;
-			}
-			returnedElements.push(el);
-		});
-		if (!inserted) returnedElements.push(value);
-		return returnedElements;
-	}
-
-	elementsToLine(elements: number[][]): InputsLine {
-		const line: InputsLine = [];
-		elements.forEach(lineParts => lineParts.forEach(linePart => {
-			if (linePart === 0) {
-				line.push(Empty);
-			} else {
-				for (let i = 0; i < linePart; i++) {
-					line.push(Filled);
-				}
-			}
-		}));
+	static fillLineEnd(line: InputsLine, maxSize: number): InputsLine {
+		while (line.length < maxSize) {
+			line.push(0);
+		}
 		return line;
 	}
 }
