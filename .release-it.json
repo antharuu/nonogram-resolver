@@ -1,0 +1,18 @@
+{
+  "git": {
+    "requiredBranch": "develop",
+    "commitMessage": "Release: v${version}"
+  },
+  "hooks": {
+    "before:init": [
+      "git pull"
+    ],
+    "after:bump": "pnpx auto-changelog -p"
+  },
+  "github": {
+    "release": true
+  },
+  "npm": {
+    "publish": false
+  }
+}
