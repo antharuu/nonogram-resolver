@@ -1,6 +1,6 @@
 {
   "name": "nonogram-resolver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A nonogram resolver algorithm",
   "main": "index.js",
   "type": "module",
@@ -54,16 +54,20 @@
     "@types/jest": "^28.1.8",
     "@typescript-eslint/eslint-plugin": "^5.34.0",
     "@typescript-eslint/parser": "^5.34.0",
+    "auto-changelog": "^2.4.0",
     "babel-jest": "^28.1.3",
+    "dotenv-cli": "^6.0.0",
     "eslint": "^8.22.0",
     "eslint-plugin-jest": "^26.8.7",
     "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
+    "release-it": "*",
     "sass": "^1.54.5",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
   },
   "scripts": {
+    "release": "dotenv release-it --no-npm",
     "test": "jest"
   }
 }

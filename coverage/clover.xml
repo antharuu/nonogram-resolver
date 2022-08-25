@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1661408015585" clover="3.2.0">
-  <project timestamp="1661408015585" name="All files">
+<coverage generated="1661409928610" clover="3.2.0">
+  <project timestamp="1661409928610" name="All files">
     <metrics statements="33" coveredstatements="32" conditionals="4" coveredconditionals="3" methods="15" coveredmethods="14" elements="52" coveredelements="49" complexity="0" loc="33" ncloc="33" packages="3" files="4" classes="4"/>
     <package name="maps">
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -33,16 +33,16 @@
         <line num="26" count="4" type="stmt"/>
         <line num="27" count="20" type="stmt"/>
         <line num="31" count="2" type="stmt"/>
-        <line num="32" count="20" type="stmt"/>
+        <line num="32" count="24" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
-        <line num="35" count="20" type="stmt"/>
+        <line num="35" count="32" type="stmt"/>
         <line num="37" count="2" type="stmt"/>
       </file>
       <file name="Resolver.js" path="C:\laragon\www\NonogramResolver\src\Resolver.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
       </file>
     </package>

@@ -18,8 +18,8 @@ export class MapChecker {
 	static check(map: InputsMap) {
 		let possible = true;
 
-		this.forEachLines(map, (line, _index, _lineType, _lineSize) => {
-			if (!this.checkLine(line, 5)) {
+		this.forEachLines(map, (line, _index, _lineType, lineSize) => {
+			if (!this.checkLine(line, lineSize)) {
 				possible = false;
 			}
 		});
@@ -27,7 +27,7 @@ export class MapChecker {
 		return possible;
 	}
 
-	private static forEachLines(map: InputsMap, callback: (line: InputsLine, index: number, lineType: LineType, lineSize: number) => void) {
+	static forEachLines(map: InputsMap, callback: (line: InputsLine, index: number, lineType: LineType, lineSize: number) => void) {
 		[LineType.Col, LineType.Row].forEach(lineType => {
 			map[`${lineType}s`].forEach((line, index) => {
 				callback(line, index, lineType, this.getSize(map, lineType, 1));
@@ -35,11 +35,11 @@ export class MapChecker {
 		});
 	}
 
-	private static getSize(map: InputsMap, lineType: LineType, axis: 1 | 2): number {
+	static getSize(map: InputsMap, lineType: LineType, axis: 1 | 2): number {
 		return map.size[this.getSizeName(lineType, axis)];
 	}
 
-	private static getSizeName(lineType: LineType, axis: 1 | 2): SizeName {
+	static getSizeName(lineType: LineType, axis: 1 | 2): SizeName {
 		return LineTypeSizeName[lineType][axis];
 	}
 }
