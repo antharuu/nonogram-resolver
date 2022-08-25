@@ -20,6 +20,14 @@ describe("MapChecker work correctly", function () {
 		expect(MapChecker.getSize(R.map, LineType.Row, 1)).toEqual(5);
 	});
 
+	test("Get correct total", function () {
+		expect(MapChecker.getLineTotal([])).toEqual(0);
+		expect(MapChecker.getLineTotal([1, 1])).toEqual(2);
+		expect(MapChecker.getLineTotal([1, 3])).toEqual(4);
+		expect(MapChecker.getLineTotal([1, 0, 1, 3])).toEqual(5);
+		expect(MapChecker.getLineTotal([5])).toEqual(5);
+	});
+
 	test("Get correct line count", function () {
 		expect(MapChecker.getLineCount([3, 1])).toEqual(5);
 		expect(MapChecker.getLineCount([1, 1, 1])).toEqual(5);

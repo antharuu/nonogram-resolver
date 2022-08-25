@@ -1,8 +1,8 @@
 export enum CellState {
-	Undefined,
-	Impossible,
-	Empty,
-	Filled
+	Undefined = -1,
+	Empty = 0,
+	Filled = 1,
+	Impossible = 2,
 }
 
 export enum LineState {

@@ -44,4 +44,10 @@ export class MapChecker {
 	static getSizeName(lineType: LineType, axis: 1 | 2): SizeName {
 		return LineTypeSizeName[lineType][axis];
 	}
+
+	static getLineTotal(line: InputsLine): number {
+		let total = 0;
+		line.forEach(l => total += l);
+		return total;
+	}
 }
