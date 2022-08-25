@@ -14,7 +14,6 @@ console.log(...possibilities);
 
 console.log("\n\nObjectif:");
 console.log(...[
-	[Filled, Empty, Empty],
-	[Empty, Filled, Empty],
-	[Empty, Empty, Filled]
+	[Filled, Filled, Empty],
+	[Empty, Filled, Filled]
 ]);
