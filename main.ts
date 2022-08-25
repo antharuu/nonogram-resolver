@@ -4,5 +4,4 @@ import {Key} from "./maps/key.js";
 const R = new Resolver(Key);
 
 console.log(Key);
-console.log(Key);
 
