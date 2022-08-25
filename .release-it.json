@@ -7,7 +7,8 @@
     "before:init": [
       "git pull"
     ],
-    "after:bump": "pnpx auto-changelog -p"
+    "after:bump": "pnpx auto-changelog -p",
+    "after:git:release": "git push origin HEAD"
   },
   "github": {
     "release": true
