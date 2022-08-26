@@ -13,7 +13,7 @@ describe("Resolve lines cases", function () {
 				[Filled, Filled, Filled, Filled, Filled]
 			])
 		);
- 
+
 		test("Full and multiple line (2, 2)", () =>
 			expect(new InputLine([2, 2]).getPossibilities()).toStrictEqual([
 				[Filled, Filled, Empty, Filled, Filled]
@@ -55,13 +55,12 @@ describe("Resolve lines cases", function () {
 
 		test("Get all possibilities (1) in 3", () => {
 			expect(new InputLine([1], 3).getPossibilities())
-				.toStrictEqual([[Empty, Filled, Empty], [Empty, Empty, Filled], [Filled, Empty, Empty]]);
+				.toStrictEqual([[Empty, Empty, Filled], [Filled, Empty, Empty]]);
 		});
 
 		test("Get all possibilities (1, 2) in 5", () => {
 			expect(new InputLine([1, 2]).getPossibilities()).toStrictEqual([
 				[Empty, Filled, Empty, Filled, Filled],
-				[Filled, Empty, Empty, Filled, Filled],
 				[Filled, Empty, Filled, Filled, Empty]
 			]);
 		});
