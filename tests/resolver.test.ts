@@ -1,5 +1,3 @@
-import Resolver from "../src/Resolver";
-import {Key} from "../maps/key";
 import {CellState} from "../src/Enums/States";
 import {InputLine} from "../src/InputLine";
 
@@ -15,7 +13,7 @@ describe("Resolve lines cases", function () {
 				[Filled, Filled, Filled, Filled, Filled]
 			])
 		);
-
+ 
 		test("Full and multiple line (2, 2)", () =>
 			expect(new InputLine([2, 2]).getPossibilities()).toStrictEqual([
 				[Filled, Filled, Empty, Filled, Filled]
