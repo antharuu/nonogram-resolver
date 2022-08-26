@@ -1,5 +1,6 @@
 import {Size} from "./Globals";
 
+export type InputCellReceived = number | string
 export type InputCell = number
 
 export type InputsMap = {

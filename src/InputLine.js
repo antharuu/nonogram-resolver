@@ -3,13 +3,17 @@ var InputLine = (function () {
     function InputLine(line, maxSize) {
         if (maxSize === void 0) { maxSize = 5; }
         var _this = this;
-        this.line = line;
         this.maxSize = maxSize;
         this.lineLength = 0;
         this.lineCount = 0;
         this.elements = [];
         this.check = function () { return _this.getCount() <= _this.maxSize; };
+        this.removeEmpty = function (line) {
+            return line.filter(function (l) { return l ? parseInt("".concat(l)) > 0 : false; });
+        };
         this.isFinishedLine = function (objectif) { return objectif <= _this.getCount(); };
+        this.getLine = function () { return _this.line; };
+        this.line = this.removeEmpty(line);
         this.lineLength = this.line.length;
         this.lineCount = this.getCount();
         this.elements = this.getElements();
@@ -39,7 +43,7 @@ var InputLine = (function () {
             possibilities.push(this.getFullPossibilities());
         }
         else {
-            possibilities = this.getLinePartialPossibilities();
+            possibilities = this.getFistEndPossibilities();
         }
         return possibilities;
     };
@@ -78,6 +82,12 @@ var InputLine = (function () {
             }
         }
         return possibilities;
+    };
+    InputLine.prototype.getFistEndPossibilities = function () {
+        var emptyValues = this.maxSize - this.getCount();
+        var atFirst = InputLine.elementsToLine(InputLine.fillElements(this.elements, 0, this.getSequence(emptyValues, 0)));
+        var atEnd = InputLine.elementsToLine(InputLine.fillElements(this.elements, -1, this.getSequence(emptyValues, 0)));
+        return [atFirst, atEnd];
     };
     InputLine.prototype.getElements = function () {
         var _this = this;

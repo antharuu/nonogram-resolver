@@ -1,21 +1,26 @@
-import {InputCell} from "./Types/InputsTypes";
+import {InputCell, InputCellReceived} from "./Types/InputsTypes";
 import {CellState} from "./Enums/States.js";
 
 export class InputLine {
 	private readonly lineLength: number = 0;
 	private readonly lineCount: number = 0;
 	private readonly elements: number[][] = [];
+	private readonly line: InputCell[];
 
 	constructor(
-		private line: InputCell[],
+		line: InputCellReceived[],
 		private maxSize: number = 5
 	) {
+		this.line = this.removeEmpty(line);
 		this.lineLength = this.line.length;
 		this.lineCount = this.getCount();
 		this.elements = this.getElements();
 	}
 
 	public check = (): boolean => this.getCount() <= this.maxSize;
+
+	private removeEmpty = (line: InputCellReceived[]): InputCell[] =>
+		(line.filter(l => l ? parseInt(`${l}`) > 0 : false) as InputCell[]);
 
 	public getCount(): number {
 		let totalUsed = 0;
@@ -45,7 +50,7 @@ export class InputLine {
 		} else if (this.lineCount === this.maxSize) {
 			possibilities.push(this.getFullPossibilities());
 		} else {
-			possibilities = this.getLinePartialPossibilities();
+			possibilities = this.getFistEndPossibilities();
 		}
 
 		return possibilities;
@@ -71,7 +76,11 @@ export class InputLine {
 		return fullPossible;
 	}
 
+	/**
+	 * @deprecated 1.3 After consideration seems unnecessary. (Use getFistEndPossibilities instead, will be removed for 2.0)
+	 */
 	public getLinePartialPossibilities(): CellState[][] {
+
 		const possibilities: CellState[][] = [];
 		const emptyValues = this.maxSize - this.getTotal();
 		const possiblesPositions = emptyValues + 1;
@@ -86,6 +95,15 @@ export class InputLine {
 		}
 
 		return possibilities;
+	}
+
+	public getFistEndPossibilities(): CellState[][] {
+		const emptyValues = this.maxSize - this.getCount();
+
+		const atFirst = InputLine.elementsToLine(InputLine.fillElements(this.elements, 0, this.getSequence(emptyValues, 0)));
+		const atEnd = InputLine.elementsToLine(InputLine.fillElements(this.elements, -1, this.getSequence(emptyValues, 0)));
+
+		return [atFirst, atEnd];
 	}
 
 	public getElements(): number[][] {
@@ -148,4 +166,6 @@ export class InputLine {
 		}
 		return line;
 	}
+
+	public getLine = (): InputCell[] => this.line;
 }

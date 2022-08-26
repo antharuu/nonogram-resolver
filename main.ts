@@ -3,12 +3,12 @@ import {InputLine} from "./src/InputLine.js";
 
 const {Empty, Filled} = CellState;
 
-const input = [1, 2];
+const line = new InputLine(["1", 0, 2], 5);
 
-const possibilities = (new InputLine(input, 5)).getPossibilities();
+const possibilities = line.getPossibilities();
 
 console.log("\n\nInput:");
-console.log(input);
+console.log(line.getLine());
 
 console.log("\n\nResult:");
 console.log(...possibilities);
@@ -16,6 +16,5 @@ console.log(...possibilities);
 console.log("\n\nObjectif:");
 console.log(...[
 	[Empty, Filled, Empty, Filled, Filled],
-	[Filled, Empty, Empty, Filled, Filled],
 	[Filled, Empty, Filled, Filled, Empty],
 ]);
