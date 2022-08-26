@@ -3,6 +3,7 @@ import {LineType} from "../src/Enums/Lines.js";
 import Resolver from "../src/Resolver.js";
 import {Key} from "../maps/key.js";
 import {KeyImpossible} from "../maps/impossibles/key_impossible";
+import {InputLine} from "../src/InputLine";
 
 describe("MapChecker work correctly", function () {
 
@@ -21,25 +22,24 @@ describe("MapChecker work correctly", function () {
 	});
 
 	test("Get correct total", function () {
-		expect(MapChecker.getLineTotal([])).toEqual(0);
-		expect(MapChecker.getLineTotal([1, 1])).toEqual(2);
-		expect(MapChecker.getLineTotal([1, 3])).toEqual(4);
-		expect(MapChecker.getLineTotal([1, 0, 1, 3])).toEqual(5);
-		expect(MapChecker.getLineTotal([5])).toEqual(5);
+		expect(new InputLine([]).getTotal()).toEqual(0);
+		expect(new InputLine([1, 1]).getTotal()).toEqual(2);
+		expect(new InputLine([1, 3]).getTotal()).toEqual(4);
+		expect(new InputLine([1, 0, 1, 3]).getTotal()).toEqual(5);
+		expect(new InputLine([5],).getTotal()).toEqual(5);
 	});
 
 	test("Get correct line count", function () {
-		expect(MapChecker.getLineCount([3, 1])).toEqual(5);
-		expect(MapChecker.getLineCount([1, 1, 1])).toEqual(5);
-		expect(MapChecker.getLineCount([1, 1])).toEqual(3);
-		expect(MapChecker.getLineCount([1])).toEqual(1);
-		expect(MapChecker.getLineCount([])).toEqual(0);
+		expect(new InputLine([3, 1]).getCount()).toEqual(5);
+		expect(new InputLine([1, 1, 1]).getCount()).toEqual(5);
+		expect(new InputLine([1, 1]).getCount()).toEqual(3);
+		expect(new InputLine([1]).getCount()).toEqual(1);
+		expect(new InputLine([]).getCount()).toEqual(0);
 	});
 
 	test("Iterate correct times in columns/rows", function () {
 		let iterations = 0;
 		MapChecker.forEachLines(Key, () => iterations++);
-
 		expect(iterations).toEqual(Key.size.height + Key.size.width);
 	});
 
@@ -49,21 +49,21 @@ describe("Map are possibles/impossible", function () {
 
 	describe("Check possible lines", () => {
 
-		test("Simple possible pattern single value", () => expect(MapChecker.checkLine([1], 5)).toBeTruthy());
+		test("Simple possible pattern single value", () => expect(new InputLine([1]).check()).toBeTruthy());
 
-		test("Simple possible pattern 2 values", () => expect(MapChecker.checkLine([1, 3], 5)).toBeTruthy());
+		test("Simple possible pattern 2 values", () => expect(new InputLine([1, 3]).check()).toBeTruthy());
 
-		test("Simple possible pattern max values", () => expect(MapChecker.checkLine([1, 1, 1], 5)).toBeTruthy());
+		test("Simple possible pattern max values", () => expect(new InputLine([1, 1, 1]).check()).toBeTruthy());
 
 	});
 
 	describe("Check impossible lines", () => {
 
-		test("Simple impossible pattern single value", () => expect(MapChecker.checkLine([6], 5)).toBeFalsy());
+		test("Simple impossible pattern single value", () => expect(new InputLine([6]).check()).toBeFalsy());
 
-		test("Simple impossible pattern 2 values", () => expect(MapChecker.checkLine([2, 3], 5)).toBeFalsy());
+		test("Simple impossible pattern 2 values", () => expect(new InputLine([2, 3]).check()).toBeFalsy());
 
-		test("Simple impossible pattern many values", () => expect(MapChecker.checkLine([2, 3, 8, 7], 5)).toBeFalsy());
+		test("Simple impossible pattern many values", () => expect(new InputLine([2, 3, 8, 7]).check()).toBeFalsy());
 
 	});
 

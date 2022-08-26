@@ -1,3 +1,7 @@
 .env
 coverage/
 node_modules/
+main.js
+tests/**.js
+src/**.js.map
+src/**/*.js.map

@@ -1,15 +1,11 @@
-import Resolver from "./src/Resolver.js";
-import {Key} from "./maps/key.js";
 import {CellState} from "./src/Enums/States.js";
+import {InputLine} from "./src/InputLine.js";
 
 const {Empty, Filled} = CellState;
 
-const S = new Resolver(Key);
-S.map.size = {width: 10, height: 10};
+const input = [1, 2];
 
-const input = [1, 2, 3];
-
-const possibilities = S.getLinePossibilities(input);
+const possibilities = (new InputLine(input, 5)).getPossibilities();
 
 console.log("\n\nInput:");
 console.log(input);
