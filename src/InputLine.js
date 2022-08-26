@@ -1,19 +1,30 @@
 import { CellState } from "./Enums/States.js";
 var InputLine = (function () {
-    function InputLine(line, maxSize) {
+    function InputLine(line, maxSize, allowEmptyValues) {
         if (maxSize === void 0) { maxSize = 5; }
+        if (allowEmptyValues === void 0) { allowEmptyValues = false; }
         var _this = this;
         this.maxSize = maxSize;
         this.lineLength = 0;
         this.lineCount = 0;
         this.elements = [];
         this.check = function () { return _this.getCount() <= _this.maxSize; };
-        this.removeEmpty = function (line) {
-            return line.filter(function (l) { return l ? parseInt("".concat(l)) > 0 : false; });
+        this.clearLine = function (line, allowEmptyValues) {
+            if (allowEmptyValues === void 0) { allowEmptyValues = false; }
+            var newLine = [];
+            line.forEach(function (l) {
+                if (!allowEmptyValues && l === 0) {
+                    return;
+                }
+                else {
+                    newLine.push(parseInt("".concat(l)));
+                }
+            });
+            return newLine;
         };
         this.isFinishedLine = function (objectif) { return objectif <= _this.getCount(); };
         this.getLine = function () { return _this.line; };
-        this.line = this.removeEmpty(line);
+        this.line = this.clearLine(line, allowEmptyValues);
         this.lineLength = this.line.length;
         this.lineCount = this.getCount();
         this.elements = this.getElements();

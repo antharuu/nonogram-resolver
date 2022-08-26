@@ -9,9 +9,10 @@ export class InputLine {
 
 	constructor(
 		line: InputCellReceived[],
-		private maxSize: number = 5
+		private maxSize: number = 5,
+		allowEmptyValues = false
 	) {
-		this.line = this.removeEmpty(line);
+		this.line = this.clearLine(line, allowEmptyValues);
 		this.lineLength = this.line.length;
 		this.lineCount = this.getCount();
 		this.elements = this.getElements();
@@ -19,8 +20,19 @@ export class InputLine {
 
 	public check = (): boolean => this.getCount() <= this.maxSize;
 
-	private removeEmpty = (line: InputCellReceived[]): InputCell[] =>
-		(line.filter(l => l ? parseInt(`${l}`) > 0 : false) as InputCell[]);
+	public clearLine = (line: InputCellReceived[], allowEmptyValues = false): InputCell[] => {
+		const newLine: InputCell[] = [];
+
+		line.forEach(l => {
+			if (!allowEmptyValues && l === 0) {
+				return;
+			} else {
+				newLine.push(parseInt(`${l}`));
+			}
+		});
+
+		return newLine as InputCell[];
+	};
 
 	public getCount(): number {
 		let totalUsed = 0;
