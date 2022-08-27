@@ -32,7 +32,7 @@ class Board {
 			lines.setAttribute("data-line-type", `${lineType}`);
 
 			const inputs: HTMLLabelElement[] = [];
-			line.reverse();
+			line = [...line].reverse();
 
 			for (let y = 0; y < this.getMax(max); y++) {
 				const label = document.createElement("label");
@@ -57,6 +57,7 @@ class Board {
 	}
 
 	private makeBoard(): void {
+		this.board.innerHTML = "";
 		for (let y = 0; y < this.R.map.size.height; y++) {
 			const row = document.createElement("div");
 			row.classList.add("board__row");
@@ -76,9 +77,11 @@ class Board {
 }
 
 const R = new Resolver(Key);
-
 if (R) new Board(R);
 
-console.log(R);
-R.resolve();
-console.log(R);
+const btnResolve = document.querySelector(".infos__resolve") as HTMLButtonElement;
+btnResolve.addEventListener("click", () => {
+	R.resolve();
+	if (R) new Board(R);
+	console.log(R);
+});
