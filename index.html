@@ -5,10 +5,178 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 
     <script src="main.js" defer type="module"></script>
+    <script src="assets/js/online-resolver.js" defer></script>
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+    <div class="infos">
+        <h1 class="infos__title">Nonogram Resolver</h1>
+        <h2 class="infos__map">Key</h2>
+        <div class="infos__actions">
+            <button class="infos__import infos__btn">
+                <span class="material-symbols-outlined">file_upload</span>
+            </button>
+            <button class="infos__export infos__btn">
+                <span class="material-symbols-outlined">file_download</span>
+            </button>
+            <button class="infos__resolve infos__btn">Resolve !</button>
+        </div>
+    </div>
+    <div class="inputs-cols">
+        <div class="inputs__col inputs__col--completed">
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="0">
+            </label>
+        </div>
+        <div class="inputs__col">
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="3">
+            </label>
+        </div>
+        <div class="inputs__col">
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="1">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="3">
+            </label>
+        </div>
+        <div class="inputs__col">
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="3">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="1">
+            </label>
+        </div>
+        <div class="inputs__col">
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="0">
+            </label>
+        </div>
+    </div>
+    <div class="inputs-rows">
+        <div class="inputs__row">
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="3">
+            </label>
+        </div>
+        <div class="inputs__row">
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="1">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="1">
+            </label>
+        </div>
+        <div class="inputs__row">
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="3">
+            </label>
+        </div>
+        <div class="inputs__row">
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="1">
+            </label>
+        </div>
+        <div class="inputs__row">
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="">
+            </label>
+            <label>
+                <input type="text" class="inputs__cell" value="2">
+            </label>
+        </div>
+    </div>
+    <div class="board">
+        <div class="board__row">
+            <div class="board__cell board__cell--empty"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+        </div>
+        <div class="board__row">
+            <div class="board__cell board__cell--empty"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+        </div>
+        <div class="board__row">
+            <div class="board__cell board__cell--empty"></div>
+            <div class="board__cell board__cell--filled"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+        </div>
+        <div class="board__row">
+            <div class="board__cell board__cell--empty"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+        </div>
+        <div class="board__row">
+            <div class="board__cell board__cell--empty"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+            <div class="board__cell"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

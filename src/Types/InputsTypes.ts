@@ -9,3 +9,8 @@ export type InputsMap = {
 	cols: number[][];
 	rows: number[][];
 }
+
+export type InputReceived = {
+	cols: InputCellReceived[][];
+	rows: InputCellReceived[][];
+}

@@ -48,7 +48,7 @@ var InputLine = (function () {
     InputLine.prototype.getPossibilities = function () {
         var possibilities = [];
         if (this.lineCount <= 0) {
-            possibilities.push([]);
+            possibilities.push(this.getSequence(this.maxSize, CellState.Empty));
         }
         else if (this.lineCount === this.maxSize) {
             possibilities.push(this.getFullPossibilities());
@@ -161,6 +161,26 @@ var InputLine = (function () {
             line.push(0);
         }
         return line;
+    };
+    InputLine.prototype.resolve = function () {
+        var possibilities = this.getPossibilities(), maxPossibilities = possibilities.length, possibilitiesScore = [], res = [];
+        possibilities.forEach(function (possibility) {
+            possibility.forEach(function (l, n) {
+                if (!possibilitiesScore[n])
+                    possibilitiesScore[n] = 0;
+                if (l === CellState.Filled)
+                    possibilitiesScore[n]++;
+            });
+        });
+        possibilitiesScore.forEach(function (possibility) {
+            if (possibility >= maxPossibilities) {
+                res.push(CellState.Filled);
+            }
+            else {
+                res.push(CellState.Empty);
+            }
+        });
+        return res;
     };
     return InputLine;
 }());

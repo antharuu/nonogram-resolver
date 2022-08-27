@@ -1,5 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@500;700;900&display=swap");
 :root {
-  font-size: 16px;
+  font-size: clamp(4px, 2.7vw, 16px);
+  --map-size--col: 5;
+  --map-size--row: 5;
+  --map-inputs--col: 3;
+  --map-inputs--row: 3;
+  --total-map-size--col: 8;
+  --total-map-size--row: 8;
 }
 
 * {
@@ -11,18 +18,196 @@ html, body {
   margin: 0;
   display: grid;
   height: 100vh;
-  background-color: #000;
+  font-family: Lato, sans-serif;
+  background: #c2e59c;
+  background: -webkit-linear-gradient(to right, #64b3f4, #c2e59c);
+  background: linear-gradient(to right, #64b3f4, #c2e59c);
 }
 
 #app {
-  --size: clamp(4rem, calc(100vw - 2rem), calc(100vh - 2rem));
+  --size: clamp(4rem, calc(100vw - 2rem), 600px);
   margin: auto;
-  outline: 1px solid red;
   width: var(--size);
   height: var(--size);
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--total-map-size--col), 1fr);
+  grid-template-rows: repeat(var(--total-map-size--row), 1fr);
+  gap: 0.5rem;
+}
+#app .infos {
+  grid-column: span var(--map-inputs--row);
+  grid-row: span var(--map-inputs--col);
+  border: 0.3rem solid #96efef;
+  background-color: #fff;
+  border-radius: 2rem;
+  color: #212121;
+  padding: 0.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#app .infos__title {
+  margin: 0;
+  font-size: 1.25rem;
+  text-align: center;
+  background-color: #212121;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+#app .infos__map {
+  margin: 0.2rem 0;
+  font-size: 1.2rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+#app .infos__actions {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.25rem;
+}
+#app .infos__btn {
+  border: none;
+  padding: 0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 1.5rem;
+  transform: scale(1);
+  transition: opacity 250ms ease-in-out;
+  position: relative;
+}
+#app .infos__btn > .material-symbols-outlined {
+  font-size: 1rem;
+}
+#app .infos__btn:hover {
+  transform: scale(0.95);
+}
+#app .infos__btn:active {
+  transform: scale(0.93);
+}
+#app .infos__btn::before {
+  position: absolute;
+  bottom: calc(100% + 0.25rem);
+  background-color: #212121;
+  padding: 0.5rem 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 1rem;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+#app .infos__btn:hover::before {
+  opacity: 1;
+}
+#app .infos__resolve {
+  background-color: #74b3f1;
+  grid-column: span 3;
+}
+#app .infos__import {
+  background-color: #74f1b9;
+}
+#app .infos__import::before {
+  content: "Import";
+}
+#app .infos__export {
+  background-color: #f1c574;
+}
+#app .infos__export::before {
+  content: "Export";
+}
+#app .inputs-cols {
+  grid-column: span var(--map-size--row);
+  grid-row: span var(--map-inputs--col);
+  display: grid;
+  grid-template-columns: repeat(var(--map-size--row), 1fr);
+  gap: 0.25rem;
+}
+#app .inputs-cols > .inputs__col {
+  grid-template-rows: repeat(var(--map-inputs--col), 1fr);
+}
+#app .inputs-cols > .inputs__col:nth-child(2n+1) {
+  border-radius: 2rem 2rem 0.5rem 0.5rem;
+}
+#app .inputs-cols > .inputs__col label:first-child > input {
+  border-radius: 1.5rem 1.5rem 0.25rem 0.25rem;
+}
+#app .inputs-rows {
+  grid-column: span var(--map-inputs--row);
+  grid-row: span var(--map-size--col);
+  display: grid;
+  grid-template-rows: repeat(var(--map-size--col), 1fr);
+  gap: 0.25rem;
+}
+#app .inputs-rows > div {
+  grid-template-columns: repeat(var(--map-inputs--row), 1fr);
+}
+#app .inputs-rows > div:nth-child(2n+1) {
+  border-radius: 2rem 0.5rem 0.5rem 2rem;
+}
+#app .inputs-rows > div label:first-child > input {
+  border-radius: 1.5rem 0.25rem 0.25rem 1.5rem;
+}
+#app .inputs-cols > .inputs__col, #app .inputs-cols > .inputs__row, #app .inputs-rows > .inputs__col, #app .inputs-rows > .inputs__row {
+  display: grid;
   overflow: hidden;
+  padding: 0.5rem;
+  gap: 0.25rem;
+}
+#app .inputs-cols > .inputs__col--completed, #app .inputs-cols > .inputs__row--completed, #app .inputs-rows > .inputs__col--completed, #app .inputs-rows > .inputs__row--completed {
+  opacity: 0.8;
+}
+#app .inputs-cols > .inputs__col:nth-child(2n+1), #app .inputs-cols > .inputs__row:nth-child(2n+1), #app .inputs-rows > .inputs__col:nth-child(2n+1), #app .inputs-rows > .inputs__row:nth-child(2n+1) {
+  background: rgba(33, 33, 33, 0.2);
+}
+#app .inputs-cols > .inputs__col label, #app .inputs-cols > .inputs__row label, #app .inputs-rows > .inputs__col label, #app .inputs-rows > .inputs__row label {
+  position: relative;
+}
+#app .inputs-cols > .inputs__col label > input, #app .inputs-cols > .inputs__row label > input, #app .inputs-rows > .inputs__col label > input, #app .inputs-rows > .inputs__row label > input {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 1.6rem;
+  text-align: center;
+  color: rgba(33, 33, 33, 0.9);
+  border-radius: 0.25rem;
+  transition: background-color 100ms ease-out;
+}
+#app .inputs-cols > .inputs__col label:hover > input, #app .inputs-cols > .inputs__col label:active > input, #app .inputs-cols > .inputs__col label:focus > input, #app .inputs-cols > .inputs__col label:focus-visible > input, #app .inputs-cols > .inputs__col label:focus-within > input, #app .inputs-cols > .inputs__row label:hover > input, #app .inputs-cols > .inputs__row label:active > input, #app .inputs-cols > .inputs__row label:focus > input, #app .inputs-cols > .inputs__row label:focus-visible > input, #app .inputs-cols > .inputs__row label:focus-within > input, #app .inputs-rows > .inputs__col label:hover > input, #app .inputs-rows > .inputs__col label:active > input, #app .inputs-rows > .inputs__col label:focus > input, #app .inputs-rows > .inputs__col label:focus-visible > input, #app .inputs-rows > .inputs__col label:focus-within > input, #app .inputs-rows > .inputs__row label:hover > input, #app .inputs-rows > .inputs__row label:active > input, #app .inputs-rows > .inputs__row label:focus > input, #app .inputs-rows > .inputs__row label:focus-visible > input, #app .inputs-rows > .inputs__row label:focus-within > input {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+#app .board {
+  background-color: rgba(33, 33, 33, 0.7);
+  border-radius: 0.25rem;
+  display: grid;
+  grid-column: span var(--map-size--col);
+  grid-row: span var(--map-size--row);
+  grid-template-rows: repeat(var(--map-size--row), 1fr);
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+#app .board > .board__row {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(var(--map-size--col), 1fr);
+}
+#app .board > .board__row > .board__cell {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0.25rem;
+}
+#app .board > .board__row > .board__cell--filled {
+  background-color: #44c5f8;
+}
+#app .board > .board__row > .board__cell--empty {
+  background-color: white;
 }
 
 /*# sourceMappingURL=main.css.map */

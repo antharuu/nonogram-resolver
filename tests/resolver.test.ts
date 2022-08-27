@@ -67,6 +67,18 @@ describe("Resolve lines cases", function () {
 
 	});
 
+	describe("Resolve from lines", function () {
+
+		test("Resolve simple line", function () {
+			expect(new InputLine([1], 3).resolve()).toEqual([0, 0, 0]);
+			expect(new InputLine([2], 3).resolve()).toEqual([0, 1, 0]);
+			expect(new InputLine([3], 3).resolve()).toEqual([1, 1, 1]);
+			expect(new InputLine([3], 5).resolve()).toEqual([0, 0, 1, 0, 0]);
+			expect(new InputLine([1, 3], 5).resolve()).toEqual([1, 0, 1, 1, 1]);
+		});
+
+	});
+
 });
 
 // describe("Resolve simple map (key)", function () {

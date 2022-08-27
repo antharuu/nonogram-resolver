@@ -1,5 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@500;700;900&display=swap')
+
+$black: #212121
+
 \:root
-  font-size: 16px
+  font-size: clamp(4px, 2.7vw, 16px)
+  --map-size--col: 5
+  --map-size--row: 5
+  --map-inputs--col: 3
+  --map-inputs--row: 3
+  --total-map-size--col: 8
+  --total-map-size--row: 8
 
 *
   box-sizing: border-box
@@ -9,14 +19,200 @@ html, body
   margin: 0
   display: grid
   height: 100vh
-  background-color: #000
+  font-family: Lato, sans-serif
+  background: #c2e59c
+  background: -webkit-linear-gradient(to right, #64b3f4, #c2e59c)
+  background: linear-gradient(to right, #64b3f4, #c2e59c)
+
 
 #app
-  --size: clamp(4rem, calc(100vw - 2rem), calc(100vh - 2rem))
+  --size: clamp(4rem, calc(100vw - 2rem), 600px)
   margin: auto
-  outline: 1px solid red
   width: var(--size)
   height: var(--size)
   position: relative
   z-index: 1
-  overflow: hidden
+  display: grid
+  grid-template-columns: repeat(var(--total-map-size--col), 1fr)
+  grid-template-rows: repeat(var(--total-map-size--row), 1fr)
+  gap: .5rem
+
+  .infos
+    grid-column: span var(--map-inputs--row)
+    grid-row: span var(--map-inputs--col)
+
+    border: .3rem solid #96efef
+    background-color: #fff
+    border-radius: 2rem
+    color: $black
+    padding: .5rem
+    position: relative
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+    &__title
+      margin: 0
+      font-size: 1.25rem
+      text-align: center
+      background-color: $black
+      text-transform: uppercase
+      color: #fff
+      padding: .5rem
+      border-radius: 1rem
+
+    &__map
+      margin: .2rem 0
+      font-size: 1.2rem
+      text-align: center
+      text-transform: uppercase
+
+    &__actions
+      display: grid
+      grid-template-columns: repeat(5, 1fr)
+      gap: .25rem
+
+    &__btn
+      border: none
+      padding: .5rem
+      font-weight: bold
+      font-size: 1rem
+      letter-spacing: .1rem
+      color: rgba(#fff, .85)
+      border-radius: 1.5rem
+      transform: scale(1)
+      transition: opacity 250ms ease-in-out
+      position: relative
+
+      > .material-symbols-outlined
+        font-size: 1rem
+
+      &:hover
+        transform: scale(.95)
+
+      &:active
+        transform: scale(.93)
+
+      &::before
+        position: absolute
+        bottom: calc(100% + .25rem)
+        background-color: $black
+        padding: .5rem 1rem
+        left: 50%
+        transform: translateX(-50%)
+        border-radius: 1rem
+        opacity: 0
+        transition: opacity 150ms ease-in-out
+
+      &:hover::before
+        opacity: 1
+
+    &__resolve
+      background-color: #74b3f1
+      grid-column: span 3
+
+    &__import
+      background-color: #74f1b9
+
+      &::before
+        content: 'Import'
+
+    &__export
+      background-color: #f1c574
+
+      &::before
+        content: 'Export'
+
+
+  .inputs-cols
+    grid-column: span var(--map-size--row)
+    grid-row: span var(--map-inputs--col)
+    display: grid
+    grid-template-columns: repeat(var(--map-size--row), 1fr)
+    gap: .25rem
+
+    > .inputs__col
+      grid-template-rows: repeat(var(--map-inputs--col), 1fr)
+
+      &:nth-child(2n+1)
+        border-radius: 2rem 2rem .5rem .5rem
+
+      label:first-child > input
+        border-radius: 1.5rem 1.5rem .25rem .25rem
+
+
+  .inputs-rows
+    grid-column: span var(--map-inputs--row)
+    grid-row: span var(--map-size--col)
+    display: grid
+    grid-template-rows: repeat(var(--map-size--col), 1fr)
+    gap: .25rem
+
+    > div
+      grid-template-columns: repeat(var(--map-inputs--row), 1fr)
+
+      &:nth-child(2n+1)
+        border-radius: 2rem .5rem .5rem 2rem
+
+      label:first-child > input
+        border-radius: 1.5rem .25rem .25rem 1.5rem
+
+
+  .inputs-cols, .inputs-rows
+    > .inputs__col, > .inputs__row
+      display: grid
+      overflow: hidden
+      padding: .5rem
+      gap: .25rem
+
+      &--completed
+        opacity: .8
+
+      &:nth-child(2n+1)
+        background: rgba($black, .2)
+
+      label
+        position: relative
+
+        > input
+          position: absolute
+          inset: 0
+          background-color: transparent
+          border: none
+          font-family: 'Roboto', sans-serif
+          font-weight: bold
+          font-size: 1.6rem
+          text-align: center
+          color: rgba($black, .9)
+          border-radius: .25rem
+          transition: background-color 100ms ease-out
+
+        &:hover, &:active, &:focus, &:focus-visible, &:focus-within
+          > input
+            background-color: rgba(white, .2)
+
+
+  .board
+    background-color: rgba($black, .7)
+    border-radius: .25rem
+    display: grid
+    grid-column: span var(--map-size--col)
+    grid-row: span var(--map-size--row)
+    grid-template-rows: repeat(var(--map-size--row), 1fr)
+    gap: .5rem
+    padding: .5rem
+
+    > .board__row
+      display: grid
+      gap: .5rem
+      grid-template-columns: repeat(var(--map-size--col), 1fr)
+
+      > .board__cell
+        background-color: rgba(white, .5)
+        border-radius: .25rem
+
+        &--filled
+          background-color: #44c5f8
+
+        &--empty
+          background-color: white

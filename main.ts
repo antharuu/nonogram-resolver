@@ -1,20 +1,22 @@
-import {CellState} from "./src/Enums/States.js";
-import {InputLine} from "./src/InputLine.js";
-
-const {Empty, Filled} = CellState;
-
-const line = new InputLine(["1", 0, 2], 5);
-
-const possibilities = line.getPossibilities();
-
-console.log("\n\nInput:");
-console.log(line.getLine());
-
-console.log("\n\nResult:");
-console.log(...possibilities);
-
-console.log("\n\nObjectif:");
-console.log(...[
-	[Empty, Filled, Empty, Filled, Filled],
-	[Filled, Empty, Filled, Filled, Empty],
-]);
+// import {CellState} from "./src/Enums/States.js";
+// import Resolver from "./src/Resolver.js";
+// import {Key} from "./maps/key.js";
+//
+// const {Empty, Filled} = CellState;
+//
+// const R = new Resolver(Key);
+//
+// const res = R.resolve();
+// const obj = {
+// 	"name": "Key",
+// 	"size": {
+// 		"width": 5,
+// 		"height": 5
+// 	},
+// 	"cols": [],
+// 	"rows": []
+// };
+//
+// console.log("\nResult:", res.cols);
+//
+// console.log("\nObjectif:", obj.cols);
