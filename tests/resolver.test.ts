@@ -81,7 +81,3 @@ describe("Resolve lines cases", function () {
 	});
 
 });
-
-// describe("Resolve simple map (key)", function () {
-// 	const R = new Resolver(Key) as Resolver;
-// });
