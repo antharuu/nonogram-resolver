@@ -6,10 +6,10 @@ import {InputLine} from "./InputLine.js";
 
 export default class Resolver {
 
-	private readonly map: ResolvedMap;
+	public readonly map: ResolvedMap;
 	private readonly inputs: InputReceived;
 
-	constructor(private readonly oldMap: InputsMap) {
+	constructor(public readonly oldMap: InputsMap) {
 		this.map = {
 			name: oldMap.name,
 			size: oldMap.size,
@@ -28,7 +28,6 @@ export default class Resolver {
 	public resolveLines(): CellState[][] {
 		MapChecker.forEachLines(this.oldMap, (line, index, lineType) => {
 			const resolvedLine = new InputLine(line, MapChecker.getSize(this.map, lineType, 1)).resolve();
-			console.log(lineType, line, resolvedLine);
 		});
 
 		return [];

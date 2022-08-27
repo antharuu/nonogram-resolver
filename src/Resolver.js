@@ -19,7 +19,6 @@ var Resolver = (function () {
         var _this = this;
         MapChecker.forEachLines(this.oldMap, function (line, index, lineType) {
             var resolvedLine = new InputLine(line, MapChecker.getSize(_this.map, lineType, 1)).resolve();
-            console.log(lineType, line, resolvedLine);
         });
         return [];
     };

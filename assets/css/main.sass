@@ -25,6 +25,13 @@ html, body
   background: linear-gradient(to right, #64b3f4, #c2e59c)
 
 
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button
+  -webkit-appearance: none
+  margin: 0
+
+input[type=number]
+  -moz-appearance: textfield
+
 #app
   --size: clamp(4rem, calc(100vw - 2rem), 600px)
   margin: auto
@@ -103,6 +110,7 @@ html, body
         border-radius: 1rem
         opacity: 0
         transition: opacity 150ms ease-in-out
+        pointer-events: none
 
       &:hover::before
         opacity: 1
@@ -186,6 +194,15 @@ html, body
           color: rgba($black, .9)
           border-radius: .25rem
           transition: background-color 100ms ease-out
+
+          &::placeholder
+            color: transparent
+
+          &:invalid
+            background-color: rgba(red, .5) !important
+
+        &:last-child > input::placeholder
+          color: rgba($black, .8)
 
         &:hover, &:active, &:focus, &:focus-visible, &:focus-within
           > input

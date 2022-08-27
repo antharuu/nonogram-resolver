@@ -24,6 +24,15 @@ html, body {
   background: linear-gradient(to right, #64b3f4, #c2e59c);
 }
 
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 #app {
   --size: clamp(4rem, calc(100vw - 2rem), 600px);
   margin: auto;
@@ -101,6 +110,7 @@ html, body {
   border-radius: 1rem;
   opacity: 0;
   transition: opacity 150ms ease-in-out;
+  pointer-events: none;
 }
 #app .infos__btn:hover::before {
   opacity: 1;
@@ -180,6 +190,15 @@ html, body {
   color: rgba(33, 33, 33, 0.9);
   border-radius: 0.25rem;
   transition: background-color 100ms ease-out;
+}
+#app .inputs-cols > .inputs__col label > input::placeholder, #app .inputs-cols > .inputs__row label > input::placeholder, #app .inputs-rows > .inputs__col label > input::placeholder, #app .inputs-rows > .inputs__row label > input::placeholder {
+  color: transparent;
+}
+#app .inputs-cols > .inputs__col label > input:invalid, #app .inputs-cols > .inputs__row label > input:invalid, #app .inputs-rows > .inputs__col label > input:invalid, #app .inputs-rows > .inputs__row label > input:invalid {
+  background-color: rgba(255, 0, 0, 0.5) !important;
+}
+#app .inputs-cols > .inputs__col label:last-child > input::placeholder, #app .inputs-cols > .inputs__row label:last-child > input::placeholder, #app .inputs-rows > .inputs__col label:last-child > input::placeholder, #app .inputs-rows > .inputs__row label:last-child > input::placeholder {
+  color: rgba(33, 33, 33, 0.8);
 }
 #app .inputs-cols > .inputs__col label:hover > input, #app .inputs-cols > .inputs__col label:active > input, #app .inputs-cols > .inputs__col label:focus > input, #app .inputs-cols > .inputs__col label:focus-visible > input, #app .inputs-cols > .inputs__col label:focus-within > input, #app .inputs-cols > .inputs__row label:hover > input, #app .inputs-cols > .inputs__row label:active > input, #app .inputs-cols > .inputs__row label:focus > input, #app .inputs-cols > .inputs__row label:focus-visible > input, #app .inputs-cols > .inputs__row label:focus-within > input, #app .inputs-rows > .inputs__col label:hover > input, #app .inputs-rows > .inputs__col label:active > input, #app .inputs-rows > .inputs__col label:focus > input, #app .inputs-rows > .inputs__col label:focus-visible > input, #app .inputs-rows > .inputs__col label:focus-within > input, #app .inputs-rows > .inputs__row label:hover > input, #app .inputs-rows > .inputs__row label:active > input, #app .inputs-rows > .inputs__row label:focus > input, #app .inputs-rows > .inputs__row label:focus-visible > input, #app .inputs-rows > .inputs__row label:focus-within > input {
   background-color: rgba(255, 255, 255, 0.2);
