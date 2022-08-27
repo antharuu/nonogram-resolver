@@ -6,7 +6,8 @@ const {Empty, Filled} = CellState;
 describe("Resolve lines cases", function () {
 
 	describe("Get all possibilities from line", function () {
-		test("Empty line", () => expect(new InputLine([]).getPossibilities()).toStrictEqual([[]]));
+		test("Empty line", () => expect(new InputLine([]).getPossibilities())
+			.toStrictEqual([[0, 0, 0, 0, 0]]));
 
 		test("Full line", () =>
 			expect(new InputLine([5]).getPossibilities()).toStrictEqual([
