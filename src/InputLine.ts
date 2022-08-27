@@ -1,21 +1,38 @@
-import {InputCell} from "./Types/InputsTypes";
+import {InputCell, InputCellReceived} from "./Types/InputsTypes";
 import {CellState} from "./Enums/States.js";
 
 export class InputLine {
 	private readonly lineLength: number = 0;
 	private readonly lineCount: number = 0;
 	private readonly elements: number[][] = [];
+	private readonly line: InputCell[];
 
 	constructor(
-		private line: InputCell[],
-		private maxSize: number = 5
+		line: InputCellReceived[],
+		private maxSize: number = 5,
+		allowEmptyValues = false
 	) {
+		this.line = this.clearLine(line, allowEmptyValues);
 		this.lineLength = this.line.length;
 		this.lineCount = this.getCount();
 		this.elements = this.getElements();
 	}
 
 	public check = (): boolean => this.getCount() <= this.maxSize;
+
+	public clearLine = (line: InputCellReceived[], allowEmptyValues = false): InputCell[] => {
+		const newLine: InputCell[] = [];
+
+		line.forEach(l => {
+			if (!allowEmptyValues && l === 0) {
+				return;
+			} else {
+				newLine.push(parseInt(`${l}`));
+			}
+		});
+
+		return newLine as InputCell[];
+	};
 
 	public getCount(): number {
 		let totalUsed = 0;
@@ -41,11 +58,11 @@ export class InputLine {
 		let possibilities: CellState[][] = [];
 
 		if (this.lineCount <= 0) {
-			possibilities.push([]);
+			possibilities.push(this.getSequence(this.maxSize, CellState.Empty));
 		} else if (this.lineCount === this.maxSize) {
 			possibilities.push(this.getFullPossibilities());
 		} else {
-			possibilities = this.getLinePartialPossibilities();
+			possibilities = this.getFistEndPossibilities();
 		}
 
 		return possibilities;
@@ -71,7 +88,11 @@ export class InputLine {
 		return fullPossible;
 	}
 
+	/**
+	 * @deprecated 1.3 After consideration seems unnecessary. (Use getFistEndPossibilities instead, will be removed for 2.0)
+	 */
 	public getLinePartialPossibilities(): CellState[][] {
+
 		const possibilities: CellState[][] = [];
 		const emptyValues = this.maxSize - this.getTotal();
 		const possiblesPositions = emptyValues + 1;
@@ -86,6 +107,15 @@ export class InputLine {
 		}
 
 		return possibilities;
+	}
+
+	public getFistEndPossibilities(): CellState[][] {
+		const emptyValues = this.maxSize - this.getCount();
+
+		const atFirst = InputLine.elementsToLine(InputLine.fillElements(this.elements, 0, this.getSequence(emptyValues, 0)));
+		const atEnd = InputLine.elementsToLine(InputLine.fillElements(this.elements, -1, this.getSequence(emptyValues, 0)));
+
+		return [atFirst, atEnd];
 	}
 
 	public getElements(): number[][] {
@@ -147,5 +177,34 @@ export class InputLine {
 			line.push(0);
 		}
 		return line;
+	}
+
+	public getLine = (): InputCell[] => this.line;
+
+	public resolve(): CellState[] {
+		const possibilities = this.getPossibilities(),
+			maxPossibilities = possibilities.length,
+			possibilitiesScore: number[] = [],
+			res: CellState[] = [];
+		if (possibilities.length === 1) {
+			return possibilities[0];
+		} else {
+			possibilities.forEach(possibility => {
+				possibility.forEach((l, n) => {
+					if (!possibilitiesScore[n]) possibilitiesScore[n] = 0;
+					if (l === CellState.Filled) possibilitiesScore[n]++;
+				});
+			});
+
+			possibilitiesScore.forEach(possibility => {
+				if (possibility >= maxPossibilities) {
+					res.push(CellState.Filled);
+				} else {
+					res.push(CellState.Undefined);
+				}
+			});
+		}
+
+		return res;
 	}
 }

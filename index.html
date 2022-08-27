@@ -5,10 +5,33 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 
     <script src="main.js" defer type="module"></script>
+    <script src="assets/js/online-resolver.js" defer type="module"></script>
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+    <div class="infos">
+        <h1 class="infos__title">Nonogram Resolver</h1>
+        <h2 class="infos__map">Empty map</h2>
+        <div class="infos__actions">
+            <div class="import__container">
+                <input type="file" id="import__btn" accept=".nrmap,.json">
+                <button class="infos__import infos__btn">
+                    <span class="material-symbols-outlined">file_upload</span>
+                </button>
+            </div>
+            <a href="#" class="infos__export infos__btn">
+                <span class="material-symbols-outlined">file_download</span>
+            </a>
+            <button class="infos__resolve infos__btn">Resolve !</button>
+        </div>
+    </div>
+    <div class="inputs-cols"></div>
+    <div class="inputs-rows"></div>
+    <div class="board"></div>
+</div>
 </body>
 </html>

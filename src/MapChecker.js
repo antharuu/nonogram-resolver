@@ -1,5 +1,5 @@
 import { LineType, LineTypeSizeName } from "./Enums/Lines.js";
-import { InputLine } from "./InputLine";
+import { InputLine } from "./InputLine.js";
 var MapChecker = (function () {
     function MapChecker() {
     }

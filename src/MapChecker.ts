@@ -1,7 +1,7 @@
 import {InputsMap} from "./Types/InputsTypes";
 import {LineType, LineTypeSizeName} from "./Enums/Lines.js";
 import {SizeName} from "./Types/Globals";
-import {InputLine} from "./InputLine";
+import {InputLine} from "./InputLine.js";
 
 export class MapChecker {
 

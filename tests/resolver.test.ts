@@ -6,14 +6,15 @@ const {Empty, Filled} = CellState;
 describe("Resolve lines cases", function () {
 
 	describe("Get all possibilities from line", function () {
-		test("Empty line", () => expect(new InputLine([]).getPossibilities()).toStrictEqual([[]]));
+		test("Empty line", () => expect(new InputLine([]).getPossibilities())
+			.toStrictEqual([[0, 0, 0, 0, 0]]));
 
 		test("Full line", () =>
 			expect(new InputLine([5]).getPossibilities()).toStrictEqual([
 				[Filled, Filled, Filled, Filled, Filled]
 			])
 		);
- 
+
 		test("Full and multiple line (2, 2)", () =>
 			expect(new InputLine([2, 2]).getPossibilities()).toStrictEqual([
 				[Filled, Filled, Empty, Filled, Filled]
@@ -55,21 +56,28 @@ describe("Resolve lines cases", function () {
 
 		test("Get all possibilities (1) in 3", () => {
 			expect(new InputLine([1], 3).getPossibilities())
-				.toStrictEqual([[Empty, Filled, Empty], [Empty, Empty, Filled], [Filled, Empty, Empty]]);
+				.toStrictEqual([[Empty, Empty, Filled], [Filled, Empty, Empty]]);
 		});
 
 		test("Get all possibilities (1, 2) in 5", () => {
 			expect(new InputLine([1, 2]).getPossibilities()).toStrictEqual([
 				[Empty, Filled, Empty, Filled, Filled],
-				[Filled, Empty, Empty, Filled, Filled],
 				[Filled, Empty, Filled, Filled, Empty]
 			]);
 		});
 
 	});
 
-});
+	describe("Resolve from lines", function () {
 
-// describe("Resolve simple map (key)", function () {
-// 	const R = new Resolver(Key) as Resolver;
-// });
+		test("Resolve simple line", function () {
+			expect(new InputLine([1], 3).resolve()).toEqual([-1, -1, -1]);
+			expect(new InputLine([2], 3).resolve()).toEqual([-1, 1, -1]);
+			expect(new InputLine([3], 3).resolve()).toEqual([1, 1, 1]);
+			expect(new InputLine([3], 5).resolve()).toEqual([-1, -1, 1, -1, -1]);
+			expect(new InputLine([1, 3], 5).resolve()).toEqual([1, 0, 1, 1, 1]);
+		});
+
+	});
+
+});
