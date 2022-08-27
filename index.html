@@ -15,14 +15,17 @@
 <div id="app">
     <div class="infos">
         <h1 class="infos__title">Nonogram Resolver</h1>
-        <h2 class="infos__map">Key</h2>
+        <h2 class="infos__map">Empty map</h2>
         <div class="infos__actions">
-            <button class="infos__import infos__btn" disabled style="opacity: .5;">
-                <span class="material-symbols-outlined">file_upload</span>
-            </button>
-            <button class="infos__export infos__btn" disabled style="opacity: .5;">
+            <div class="import__container">
+                <input type="file" id="import__btn" accept=".nrmap,.json">
+                <button class="infos__import infos__btn">
+                    <span class="material-symbols-outlined">file_upload</span>
+                </button>
+            </div>
+            <a href="#" class="infos__export infos__btn">
                 <span class="material-symbols-outlined">file_download</span>
-            </button>
+            </a>
             <button class="infos__resolve infos__btn">Resolve !</button>
         </div>
     </div>

@@ -164,22 +164,27 @@ var InputLine = (function () {
     };
     InputLine.prototype.resolve = function () {
         var possibilities = this.getPossibilities(), maxPossibilities = possibilities.length, possibilitiesScore = [], res = [];
-        possibilities.forEach(function (possibility) {
-            possibility.forEach(function (l, n) {
-                if (!possibilitiesScore[n])
-                    possibilitiesScore[n] = 0;
-                if (l === CellState.Filled)
-                    possibilitiesScore[n]++;
+        if (possibilities.length === 1) {
+            return possibilities[0];
+        }
+        else {
+            possibilities.forEach(function (possibility) {
+                possibility.forEach(function (l, n) {
+                    if (!possibilitiesScore[n])
+                        possibilitiesScore[n] = 0;
+                    if (l === CellState.Filled)
+                        possibilitiesScore[n]++;
+                });
             });
-        });
-        possibilitiesScore.forEach(function (possibility) {
-            if (possibility >= maxPossibilities) {
-                res.push(CellState.Filled);
-            }
-            else {
-                res.push(CellState.Empty);
-            }
-        });
+            possibilitiesScore.forEach(function (possibility) {
+                if (possibility >= maxPossibilities) {
+                    res.push(CellState.Filled);
+                }
+                else {
+                    res.push(CellState.Undefined);
+                }
+            });
+        }
         return res;
     };
     return InputLine;

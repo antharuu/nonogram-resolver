@@ -33,7 +33,7 @@ input[type=number]
   -moz-appearance: textfield
 
 #app
-  --size: clamp(4rem, calc(100vw - 2rem), 600px)
+  --size: clamp(4em, calc(100vw - 2em), 600px)
   margin: auto
   width: var(--size)
   height: var(--size)
@@ -42,17 +42,17 @@ input[type=number]
   display: grid
   grid-template-columns: repeat(var(--total-map-size--col), 1fr)
   grid-template-rows: repeat(var(--total-map-size--row), 1fr)
-  gap: .5rem
+  gap: .5em
 
   .infos
     grid-column: span var(--map-inputs--row)
     grid-row: span var(--map-inputs--col)
 
-    border: .3rem solid #96efef
+    border: .3em solid #96efef
     background-color: #fff
-    border-radius: 2rem
+    border-radius: 2em
     color: $black
-    padding: .5rem
+    padding: .5em
     position: relative
     display: flex
     flex-direction: column
@@ -60,39 +60,43 @@ input[type=number]
 
     &__title
       margin: 0
-      font-size: 1.25rem
+      font-size: 1.25em
       text-align: center
       background-color: $black
       text-transform: uppercase
       color: #fff
-      padding: .5rem
-      border-radius: 1rem
+      padding: .5em
+      border-radius: 1em
 
     &__map
-      margin: .2rem 0
-      font-size: 1.2rem
+      margin: .2em 0
+      font-size: 1.2em
       text-align: center
       text-transform: uppercase
 
     &__actions
       display: grid
       grid-template-columns: repeat(5, 1fr)
-      gap: .25rem
+      gap: .25em
 
     &__btn
       border: none
-      padding: .5rem
+      padding: .5em
       font-weight: bold
-      font-size: 1rem
-      letter-spacing: .1rem
+      font-size: 1em
+      letter-spacing: .1em
       color: rgba(#fff, .85)
-      border-radius: 1.5rem
+      border-radius: 1.5em
       transform: scale(1)
       transition: opacity 250ms ease-in-out
       position: relative
+      display: inline-flex
+      justify-content: center
+      align-items: center
+      text-decoration: none
 
       > .material-symbols-outlined
-        font-size: 1rem
+        font-size: 1em
 
       &:hover
         transform: scale(.95)
@@ -102,12 +106,12 @@ input[type=number]
 
       &::before
         position: absolute
-        bottom: calc(100% + .25rem)
+        bottom: calc(100% + .25em)
         background-color: $black
-        padding: .5rem 1rem
+        padding: .5em 1em
         left: 50%
         transform: translateX(-50%)
-        border-radius: 1rem
+        border-radius: 1em
         opacity: 0
         transition: opacity 150ms ease-in-out
         pointer-events: none
@@ -137,16 +141,16 @@ input[type=number]
     grid-row: span var(--map-inputs--col)
     display: grid
     grid-template-columns: repeat(var(--map-size--row), 1fr)
-    gap: .25rem
+    gap: .25em
 
     > .inputs__col
       grid-template-rows: repeat(var(--map-inputs--col), 1fr)
 
       &:nth-child(2n+1)
-        border-radius: 2rem 2rem .5rem .5rem
+        border-radius: 2em 2em .5em .5em
 
       label:first-child > input
-        border-radius: 1.5rem 1.5rem .25rem .25rem
+        border-radius: 1.5em 1.5em .25em .25em
 
 
   .inputs-rows
@@ -154,24 +158,24 @@ input[type=number]
     grid-row: span var(--map-size--col)
     display: grid
     grid-template-rows: repeat(var(--map-size--col), 1fr)
-    gap: .25rem
+    gap: .25em
 
     > div
       grid-template-columns: repeat(var(--map-inputs--row), 1fr)
 
       &:nth-child(2n+1)
-        border-radius: 2rem .5rem .5rem 2rem
+        border-radius: 2em .5em .5em 2em
 
       label:first-child > input
-        border-radius: 1.5rem .25rem .25rem 1.5rem
+        border-radius: 1.5em .25em .25em 1.5em
 
 
   .inputs-cols, .inputs-rows
     > .inputs__col, > .inputs__row
       display: grid
       overflow: hidden
-      padding: .5rem
-      gap: .25rem
+      padding: .5em
+      gap: .25em
 
       &--completed
         opacity: .8
@@ -189,10 +193,10 @@ input[type=number]
           border: none
           font-family: 'Roboto', sans-serif
           font-weight: bold
-          font-size: 1.6rem
+          font-size: 1.6em
           text-align: center
           color: rgba($black, .9)
-          border-radius: .25rem
+          border-radius: .25em
           transition: background-color 100ms ease-out
 
           &::placeholder
@@ -211,25 +215,49 @@ input[type=number]
 
   .board
     background-color: rgba($black, .7)
-    border-radius: .25rem
+    border-radius: .25em
     display: grid
     grid-column: span var(--map-size--col)
     grid-row: span var(--map-size--row)
     grid-template-rows: repeat(var(--map-size--row), 1fr)
-    gap: .5rem
-    padding: .5rem
+    gap: .5em
+    padding: .5em
 
     > .board__row
       display: grid
-      gap: .5rem
+      gap: .5em
       grid-template-columns: repeat(var(--map-size--col), 1fr)
 
       > .board__cell
         background-color: rgba(white, .5)
-        border-radius: .25rem
+        border-radius: .25em
+        position: relative
+
+        &:before
+          content: ''
+          position: absolute
+          inset: -.25rem
+          border: .25rem solid transparent
+          border-radius: .55rem
+          z-index: 5
+          transition: border-color 150ms ease-in-out
 
         &--filled
           background-color: #44c5f8
 
         &--empty
           background-color: white
+
+        &--has-cursor
+          &:before
+            transition: border-color 25ms ease-in-out
+            border-color: #44c5f8
+
+.import__container
+  position: relative
+
+  #import__btn
+    position: absolute
+    z-index: 5
+    inset: 0
+    opacity: 0

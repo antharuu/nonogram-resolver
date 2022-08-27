@@ -3,7 +3,6 @@ export var CellState;
     CellState[CellState["Undefined"] = -1] = "Undefined";
     CellState[CellState["Empty"] = 0] = "Empty";
     CellState[CellState["Filled"] = 1] = "Filled";
-    CellState[CellState["Impossible"] = 2] = "Impossible";
 })(CellState || (CellState = {}));
 export var LineState;
 (function (LineState) {

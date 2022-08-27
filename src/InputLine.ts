@@ -186,20 +186,24 @@ export class InputLine {
 			maxPossibilities = possibilities.length,
 			possibilitiesScore: number[] = [],
 			res: CellState[] = [];
-		possibilities.forEach(possibility => {
-			possibility.forEach((l, n) => {
-				if (!possibilitiesScore[n]) possibilitiesScore[n] = 0;
-				if (l === CellState.Filled) possibilitiesScore[n]++;
+		if (possibilities.length === 1) {
+			return possibilities[0];
+		} else {
+			possibilities.forEach(possibility => {
+				possibility.forEach((l, n) => {
+					if (!possibilitiesScore[n]) possibilitiesScore[n] = 0;
+					if (l === CellState.Filled) possibilitiesScore[n]++;
+				});
 			});
-		});
 
-		possibilitiesScore.forEach(possibility => {
-			if (possibility >= maxPossibilities) {
-				res.push(CellState.Filled);
-			} else {
-				res.push(CellState.Empty);
-			}
-		});
+			possibilitiesScore.forEach(possibility => {
+				if (possibility >= maxPossibilities) {
+					res.push(CellState.Filled);
+				} else {
+					res.push(CellState.Undefined);
+				}
+			});
+		}
 
 		return res;
 	}
